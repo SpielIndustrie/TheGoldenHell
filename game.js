@@ -34,8 +34,6 @@ MainGame.prototype = {
 		this.player.animations.add("walk1", [0,1,2]);
 		this.player.animations.play("walk1", 5, true);
 
-		game.input.onDown.add(changeTexture, this.player);
-
 		forward=game.input.keyboard.addKey(Phaser.Keyboard.W);
 		back=game.input.keyboard.addKey(Phaser.Keyboard.S);
 		right=game.input.keyboard.addKey(Phaser.Keyboard.D);
@@ -76,35 +74,6 @@ MainGame.prototype = {
 			}
 
 		}
-
-	},
-
-	changeTexture: function(){
-
-		if(this.player.key == "Player(Front)"){
-
-			this.player.loadTexture("Player(Back)");
-
-		}
-
-		if(this.player.key == "Player(Back)"){
-
-			this.player.loadTexture("Player(Front)");
-
-		}
-
-		if(this.player.key == "Player(Left)"){
-
-			this.player.loadTexture("Player(Right)");
-
-		}
-
-		if(this.player.key == "Player(Right)"){
-
-			this.player.loadTexture("Player(Left)");
-
-		}
-
 
 	},
 
