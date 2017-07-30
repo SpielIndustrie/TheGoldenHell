@@ -35,17 +35,23 @@ MainGame.prototype = {
 	},
 
 	create: function(){
+		game.add.tileSprite(0, 0, 1920, 1920, "Back");
+		game.world.setBounds(0, 0, 1920, 1920);
+		//game.physics.startSystem(Phaser.Physics.P2JS);
+
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.game.scale.pageAlignHorizontally=true;
 
 		game.stage.backgroundColor = "#4488AA";
 
-		//game.world.setBounds(0,0,1920,1080);
-
 		this.player=game.add.sprite(game.world.centerX,game.world.centerY,"Player(Back)");
+
+		//game.physics.p2.enable(this.player);
 
 		this.player.animations.add("walk", [0,1,2,0]);
 		this.player.animations.play("walk", 5, true);
+
+		game.camera.follow(this.player);
 
 		forward=game.input.keyboard.addKey(Phaser.Keyboard.W);
 		back=game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -60,6 +66,7 @@ MainGame.prototype = {
 
 		backgroundLayer.create(0,0,"Back");
 		playerLayer.create(this.player);*/
+		
 
 	},
 
@@ -69,15 +76,15 @@ MainGame.prototype = {
 
 			if(this.player.y > 0){
 				this.player.loadTexture("Player(Front)");
-				this.player.y=this.player.y - 1;
+				this.player.y.moveUp(3);
 			}
 					
 		}
 
 		if(back.isDown){
 
-			if(this.player.y < 270){
-				this.player.y=this.player.y + 1;
+			if(this.player.y < 1890){
+				this.player.y.moveDown(3);
 				this.player.loadTexture("Player(Back)");
 			}
 
@@ -85,8 +92,8 @@ MainGame.prototype = {
 
 		if(right.isDown){
 
-			if(this.player.x < 370){
-				this.player.x=this.player.x + 1;
+			if(this.player.x < 1890){
+				this.player.x.moveRight(3);
 				this.player.loadTexture("Player(Right)");
 			}	
 
@@ -95,7 +102,7 @@ MainGame.prototype = {
 		if(left.isDown){
 
 			if(this.player.x > 0){
-				this.player.x=this.player.x - 1;
+				this.player.x.moveLeft(3);
 				this.player.loadTexture("Player(Left)");
 			}
 
