@@ -37,7 +37,6 @@ MainGame.prototype = {
 	create: function(){
 		game.add.tileSprite(0, 0, 1920, 1920, "Back");
 		game.world.setBounds(0, 0, 1920, 1920);
-		//game.physics.startSystem(Phaser.Physics.P2JS);
 
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.game.scale.pageAlignHorizontally=true;
@@ -45,8 +44,6 @@ MainGame.prototype = {
 		game.stage.backgroundColor = "#4488AA";
 
 		this.player=game.add.sprite(game.world.centerX,game.world.centerY,"Player(Back)");
-
-		//game.physics.p2.enable(this.player);
 
 		this.player.animations.add("walk", [0,1,2,0]);
 		this.player.animations.play("walk", 5, true);
@@ -75,8 +72,7 @@ MainGame.prototype = {
 		if(forward.isDown){
 
 			if(this.player.y > 0){
-				this.player.loadTexture("Player(Front)");
-				this.player.y.moveUp(3);
+				this.player.y-=1;
 			}
 					
 		}
@@ -84,8 +80,7 @@ MainGame.prototype = {
 		if(back.isDown){
 
 			if(this.player.y < 1890){
-				this.player.y.moveDown(3);
-				this.player.loadTexture("Player(Back)");
+				this.player.y+=1;
 			}
 
 		}
@@ -93,8 +88,7 @@ MainGame.prototype = {
 		if(right.isDown){
 
 			if(this.player.x < 1890){
-				this.player.x.moveRight(3);
-				this.player.loadTexture("Player(Right)");
+				this.player.x+=1;
 			}	
 
 		}
@@ -102,8 +96,7 @@ MainGame.prototype = {
 		if(left.isDown){
 
 			if(this.player.x > 0){
-				this.player.x.moveLeft(3);
-				this.player.loadTexture("Player(Left)");
+				this.player.x-=1;
 			}
 
 		}
@@ -114,5 +107,33 @@ MainGame.prototype = {
 
 
 	},
+
+	/*changeTexture: function(){
+
+		if(forward.isDown){
+
+			this.player.loadTexture("Player(Front)");
+
+		}
+
+		if(back.isDown){
+
+			this.player.loadTexture("Player(Back)");
+
+		}
+
+		if(right.isDown){
+
+			this.player.loadTexture("Player(Right)");
+
+		}
+
+		if(left.isDown){
+
+			this.player.loadTexture("Player(Left)");
+
+		}
+
+	},*/
 
 };
