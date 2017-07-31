@@ -1,7 +1,6 @@
 - Animation nur, wenn er geht
 - Hintergrund
 - Größere Map
-- Bewegbare Camera
 - Attacken Animation
 - Gegner
 - Waffe und Helm
