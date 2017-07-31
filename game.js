@@ -46,7 +46,6 @@ MainGame.prototype = {
 		this.player=game.add.sprite(game.world.centerX,game.world.centerY,"Player(Back)");
 
 		this.player.animations.add("walk", [0,1,2,0]);
-		this.player.animations.play("walk", 5, true);
 
 		game.camera.follow(this.player);
 
@@ -73,32 +72,101 @@ MainGame.prototype = {
 
 			if(this.player.y > 0){
 				this.player.y-=1;
+				
+				if(this.player.key==="Player(Back)"){
+					this.player.loadTexture("Player(Front)");
+					this.player.animations.play("walk", 5, true);
+				}
+				if(this.player.key==="Player(Left)"){
+					this.player.loadTexture("Player(Front)");
+					this.player.animations.play("walk", 5, true);
+				}
+				if(this.player.key==="Player(Right)"){
+					this.player.loadTexture("Player(Front)");
+					this.player.animations.play("walk", 5, true);
+				}
+			
 			}
 					
+		}
+
+		if(forward.isUP){
+			this.player.animations.stop(null, true);
 		}
 
 		if(back.isDown){
 
 			if(this.player.y < 1890){
 				this.player.y+=1;
+
+				if(this.player.key==="Player(Front)"){
+					this.player.loadTexture("Player(Back)");
+					this.player.animations.play("walk", 5, true);
+				}
+				if(this.player.key==="Player(Left)"){
+					this.player.loadTexture("Player(Back)");
+					this.player.animations.play("walk", 5, true);
+				}
+				if(this.player.key==="Player(Right)"){
+					this.player.loadTexture("Player(Back)");
+					this.player.animations.play("walk", 5, true);
+				}
 			}
 
+		}
+
+		if(back.isUP){
+			this.player.animations.stop(null, true);
 		}
 
 		if(right.isDown){
 
 			if(this.player.x < 1890){
 				this.player.x+=1;
+
+				if(this.player.key==="Player(Back)"){
+					this.player.loadTexture("Player(Right)");
+					this.player.animations.play("walk", 5, true);
+				}
+				else if(this.player.key==="Player(Left)"){
+					this.player.loadTexture("Player(Right)");
+					this.player.animations.play("walk", 5, true);
+				}
+				else if(this.player.key==="Player(Front)"){
+					this.player.loadTexture("Player(Right)");
+					this.player.animations.play("walk", 5, true);
+				}
 			}	
 
+		}
+
+		if(right.isUP){
+			this.player.animations.stop(null, true);
 		}
 
 		if(left.isDown){
 
 			if(this.player.x > 0){
 				this.player.x-=1;
+
+				if(this.player.key==="Player(Back)"){
+					this.player.loadTexture("Player(Left)");
+					this.player.animations.play("walk", 5, true);
+				}
+				if(this.player.key==="Player(Front)"){
+					this.player.loadTexture("Player(Left)");
+					this.player.animations.play("walk", 5, true);
+				}
+				if(this.player.key==="Player(Right)"){
+					this.player.loadTexture("Player(Left)");
+					this.player.animations.play("walk", 5, true);
+				}
 			}
 
+		}
+
+		if(left.isUP){
+			this.player.animations.stop(null, true);
 		}
 
 	},
