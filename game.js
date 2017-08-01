@@ -20,27 +20,42 @@ MainGame.prototype = {
 
 	preload: function(){
 		//Background
-		game.load.image("Back", "img/Back.png");
 
-		game.load.tilemap("Map001", "img/Map/Map001.json", null, Phaser.Tilemap.TILED_JSON);
-		game.load.image("Tiles", "img/Map/Tiles/Tiles001-Sheet.png");
+			game.load.image("Back", "img/Back.png");
 
-		//PlayerAll
+			game.load.tilemap("Map001", "img/Map/Map001.json", null, Phaser.Tilemap.TILED_JSON);
+			game.load.image("Tiles", "img/Map/Tiles/Tiles001-Sheet.png");
 
-		//Walk
-		game.load.spritesheet("PlayerW(Back)", "img/Player/All/Walk/Player(Back)-Sheet.png", 30, 30);
-		game.load.spritesheet("PlayerW(Front)", "img/Player/All/Walk/Player(Front)-Sheet.png", 30, 30);
-		game.load.spritesheet("PlayerW(Left)", "img/Player/All/Walk/Player(Left)-Sheet.png", 30, 30);
-		game.load.spritesheet("PlayerW(Right)", "img/Player/All/Walk/Player(Right)-Sheet.png", 30, 30);
+		//Player
 
-		//Attack
-		game.load.spritesheet("Player")
+			//PlayerAll
 
-		//PlayerNone
-		game.load.spritesheet("Player(BackNone)", "img/Player/None/Player(BackNone)-Sheet.png", 30, 30);
-		game.load.spritesheet("Player(FrontNone)", "img/Player/None/Player(FrontNone)-Sheet.png", 30, 30);
-		game.load.spritesheet("Player(LeftNone)", "img/Player/None/Player(LeftNone)-Sheet.png", 30, 30);
-		game.load.spritesheet("Player(RightNone)", "img/Player/None/Player(RightNone)-Sheet.png", 30, 30);
+				//Walk
+
+					game.load.spritesheet("PlayerW(Back)", "img/Player/All/Walk/Player(Back)-Sheet.png", 30, 30);
+					game.load.spritesheet("PlayerW(Front)", "img/Player/All/Walk/Player(Front)-Sheet.png", 30, 30);
+					game.load.spritesheet("PlayerW(Left)", "img/Player/All/Walk/Player(Left)-Sheet.png", 30, 30);
+					game.load.spritesheet("PlayerW(Right)", "img/Player/All/Walk/Player(Right)-Sheet.png", 30, 30);
+
+				//Attack
+
+					game.load.spritesheet("PlayerA(Back)", "img/Player/All/Attack/Player(Back)-Sheet.png", 30, 30);
+
+			//PlayerNone
+
+				//Walk
+
+					game.load.spritesheet("Player(BackNone)", "img/Player/None/Player(BackNone)-Sheet.png", 30, 30);
+					game.load.spritesheet("Player(FrontNone)", "img/Player/None/Player(FrontNone)-Sheet.png", 30, 30);
+					game.load.spritesheet("Player(LeftNone)", "img/Player/None/Player(LeftNone)-Sheet.png", 30, 30);
+					game.load.spritesheet("Player(RightNone)", "img/Player/None/Player(RightNone)-Sheet.png", 30, 30);
+
+		//Items
+
+			//Begin
+
+				game.load.image("Keule", "img/Items/Begin/Keule.png");
+				game.load.image("Head", "img/Items/Begin/Head.png");
 	},
 
 	create: function(){
@@ -53,9 +68,14 @@ MainGame.prototype = {
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 		this.game.scale.pageAlignHorizontally=true;
 
-		this.player=game.add.sprite(game.world.centerX,game.world.centerY,"PlayerW(Back)");
+		this.keule=game.add.sprite(game.world.centerX - 20, game.world.centerY + 30, "Keule");
+
+		this.head=game.add.sprite(game.world.centerX + 20, game.world.centerY - 30, "Head");
+
+		this.player=game.add.sprite(game.world.centerX,game.world.centerY,"Player(BackNone)");
 
 		this.player.animations.add("walk", [0,1,2,0]);
+		//this.player.animations.add("attack", [0,1,2]);
 
 		game.camera.follow(this.player);
 
@@ -63,6 +83,8 @@ MainGame.prototype = {
 		back=game.input.keyboard.addKey(Phaser.Keyboard.S);
 		right=game.input.keyboard.addKey(Phaser.Keyboard.D);
 		left=game.input.keyboard.addKey(Phaser.Keyboard.A);
+
+		attack=game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 		//Layers
 
@@ -76,93 +98,224 @@ MainGame.prototype = {
 
 	update: function(){
 
-		//Movement
+		//Player
 
-		if(forward.isDown){
+			//PlayerAll
 
-				if(this.player.key==="PlayerW(Back)"){
-					this.player.loadTexture("PlayerW(Front)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Left)"){
-					this.player.loadTexture("PlayerW(Front)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Right)"){
-					this.player.loadTexture("PlayerW(Front)");
-					this.player.animations.play("walk", 10, true);
-				}
+				//Movement
 
-				if(this.player.y > 0){
-					this.player.y-=1;
-				}
-					
-		}
-		else if(back.isDown){
+					if(forward.isDown){
 
-			if(this.player.key==="PlayerW(Front)"){
-					this.player.loadTexture("PlayerW(Back)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Left)"){
-					this.player.loadTexture("PlayerW(Back)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Right)"){
-					this.player.loadTexture("PlayerW(Back)");
-					this.player.animations.play("walk", 10, true);
-				}
+							if(this.player.key==="PlayerW(Back)"){
+								this.player.loadTexture("PlayerW(Front)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Left)"){
+								this.player.loadTexture("PlayerW(Front)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Right)"){
+								this.player.loadTexture("PlayerW(Front)");
+								this.player.animations.play("walk", 10, true);
+							}
 
-				if(this.player.y < 1890){
-					this.player.y+=1;
-				}
+							if(this.player.y > 0){
+								this.player.y-=1;
+							}
+								
+					}
+					else if(back.isDown){
 
-		}
-		else if(right.isDown){
+						if(this.player.key==="PlayerW(Front)"){
+								this.player.loadTexture("PlayerW(Back)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Left)"){
+								this.player.loadTexture("PlayerW(Back)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Right)"){
+								this.player.loadTexture("PlayerW(Back)");
+								this.player.animations.play("walk", 10, true);
+							}
 
-			if(this.player.x < 1890){
-				this.player.x+=1;
+							if(this.player.y < 1890){
+								this.player.y+=1;
+							}
 
-				if(this.player.key==="PlayerW(Back)"){
-					this.player.loadTexture("PlayerW(Right)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Left)"){
-					this.player.loadTexture("PlayerW(Right)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Front)"){
-					this.player.loadTexture("PlayerW(Right)");
-					this.player.animations.play("walk", 10, true);
-				}
-			}	
+					}
+					else if(right.isDown){
 
-		}
-		else if(left.isDown){
+						if(this.player.x < 1890){
+							this.player.x+=1;
 
-			if(this.player.x > 0){
-				this.player.x-=1;
+							if(this.player.key==="PlayerW(Back)"){
+								this.player.loadTexture("PlayerW(Right)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Left)"){
+								this.player.loadTexture("PlayerW(Right)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Front)"){
+								this.player.loadTexture("PlayerW(Right)");
+								this.player.animations.play("walk", 10, true);
+							}
+						}	
 
-				if(this.player.key==="PlayerW(Back)"){
-					this.player.loadTexture("PlayerW(Left)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Front)"){
-					this.player.loadTexture("PlayerW(Left)");
-					this.player.animations.play("walk", 10, true);
-				}
-				else if(this.player.key==="PlayerW(Right)"){
-					this.player.loadTexture("PlayerW(Left)");
-					this.player.animations.play("walk", 10, true);
-				}
-			}
+					}
+					else if(left.isDown){
 
-		}
-		else{
+						if(this.player.x > 0){
+							this.player.x-=1;
 
-			this.player.animations.stop("walk");
+							if(this.player.key==="PlayerW(Back)"){
+								this.player.loadTexture("PlayerW(Left)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Front)"){
+								this.player.loadTexture("PlayerW(Left)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="PlayerW(Right)"){
+								this.player.loadTexture("PlayerW(Left)");
+								this.player.animations.play("walk", 10, true);
+							}
+						}
 
-		}
+					}
+					else{
+
+						this.player.animations.stop("walk");
+
+					}
+
+				//Attack
+
+					/*if(attack.isDown){
+
+						this.player.animations("attack", 5, true);
+
+					}
+					else{
+
+						this.player.animations.stop("attack");
+
+					}*/
+
+			//PlayerNone
+
+				//Movement
+
+					if(forward.isDown){
+
+							if(this.player.key==="Player(BackNone)"){
+								this.player.loadTexture("Player(FrontNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(LeftNone)"){
+								this.player.loadTexture("Player(FrontNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(RightNone)"){
+								this.player.loadTexture("Player(FrontNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+
+							if(this.player.y > 0){
+								this.player.y-=1;
+							}
+								
+					}
+					else if(back.isDown){
+
+						if(this.player.key==="Player(None)"){
+								this.player.loadTexture("Player(BackNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(LeftNone)"){
+								this.player.loadTexture("Player(BackNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(RightNone)"){
+								this.player.loadTexture("Player(BackNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+
+							if(this.player.y < 1890){
+								this.player.y+=1;
+							}
+
+					}
+					else if(right.isDown){
+
+						if(this.player.x < 1890){
+							this.player.x+=1;
+
+							if(this.player.key==="Player(BackNone)"){
+								this.player.loadTexture("Player(RightNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(LeftNone)"){
+								this.player.loadTexture("Player(RightNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(FrontNone)"){
+								this.player.loadTexture("Player(RightNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+						}	
+
+					}
+					else if(left.isDown){
+
+						if(this.player.x > 0){
+							this.player.x-=1;
+
+							if(this.player.key==="Player(BackNone)"){
+								this.player.loadTexture("Player(LeftNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(FrontNone)"){
+								this.player.loadTexture("Player(LeftNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+							else if(this.player.key==="Player(RightNone)"){
+								this.player.loadTexture("Player(LeftNone)");
+								this.player.animations.play("walk", 10, true);
+							}
+						}
+
+					}
+					else{
+
+						this.player.animations.stop("walk");
+
+					}
+
+				//PickUp
+
+					if(this.player.x == this.keule.x || this.keule.x == this.keule.x){
+
+						if(this.player.y == this.keule.y || this.player.y == this.keule.y){
+
+							this.player.loadTexture("PlayerW(Back)");
+							this.keule.destroy();
+
+						}
+
+					}
+
+					if(this.player.x == this.head.x || this.player.x == this.head.x){
+
+						if(this.player.y == this.head.y || this.player.y == this.head.y){
+
+							this.player.loadTexture("PlayerW(Back)");
+							this.head.destroy();
+
+						}
+
+					}
 
 	},
 
