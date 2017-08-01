@@ -1,6 +1,4 @@
-- Animation nur, wenn er geht
-- Hintergrund
-- Größere Map
+- Map
 - Attacken Animation
 - Gegner
 - Waffe und Helm
