@@ -1,4 +1,3 @@
 - Map
 - Attacken Animation
 - Gegner
-- Waffe und Helm
