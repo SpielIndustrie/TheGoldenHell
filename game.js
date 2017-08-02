@@ -105,44 +105,43 @@ MainGame.prototype = {
 				//Movement
 
 					if(forward.isDown){
-
-							if(this.player.key==="PlayerW(Back)"){
-								this.player.loadTexture("PlayerW(Front)");
-								this.player.animations.play("walk", 10, true);
-							}
-							else if(this.player.key==="PlayerW(Left)"){
-								this.player.loadTexture("PlayerW(Front)");
-								this.player.animations.play("walk", 10, true);
-							}
-							else if(this.player.key==="PlayerW(Right)"){
-								this.player.loadTexture("PlayerW(Front)");
-								this.player.animations.play("walk", 10, true);
-							}
-
 							if(this.player.y > 0){
 								this.player.y-=1;
 							}
-								
-					}
-					else if(back.isDown){
-
-						if(this.player.key==="PlayerW(Front)"){
-								this.player.loadTexture("PlayerW(Back)");
-								this.player.animations.play("walk", 10, true);
+							if(this.player.key==="PlayerW(Back)"){
+								this.player.loadTexture("PlayerW(Front)");
 							}
 							else if(this.player.key==="PlayerW(Left)"){
-								this.player.loadTexture("PlayerW(Back)");
-								this.player.animations.play("walk", 10, true);
+								this.player.loadTexture("PlayerW(Front)");
 							}
 							else if(this.player.key==="PlayerW(Right)"){
-								this.player.loadTexture("PlayerW(Back)");
-								this.player.animations.play("walk", 10, true);
+								this.player.loadTexture("PlayerW(Front)");
 							}
+							if(this.player.key==="PlayerW(Right)" || "PlayerW(Left)" || "PlayerW(Front)" || "PlayerW(BacK)"){
 
+								this.player.animations.play("walk", 10, true);
+
+							}	
+					}
+					else if(back.isDown){
 							if(this.player.y < 1890){
 								this.player.y+=1;
 							}
+							if(this.player.key==="PlayerW(Front)"){
+								this.player.loadTexture("PlayerW(Back)");
+							}
+							else if(this.player.key==="PlayerW(Left)"){
+								this.player.loadTexture("PlayerW(Back)");
+							}
+							else if(this.player.key==="PlayerW(Right)"){
+								this.player.loadTexture("PlayerW(Back)");
+							}
+							if(this.player.key==="PlayerW(Right)" || "PlayerW(Left)" || "PlayerW(Front)" || "PlayerW(BacK)"){
 
+								this.player.animations.play("walk", 10, true);
+
+							}
+							
 					}
 					else if(right.isDown){
 
@@ -151,15 +150,17 @@ MainGame.prototype = {
 
 							if(this.player.key==="PlayerW(Back)"){
 								this.player.loadTexture("PlayerW(Right)");
-								this.player.animations.play("walk", 10, true);
 							}
 							else if(this.player.key==="PlayerW(Left)"){
 								this.player.loadTexture("PlayerW(Right)");
-								this.player.animations.play("walk", 10, true);
 							}
 							else if(this.player.key==="PlayerW(Front)"){
 								this.player.loadTexture("PlayerW(Right)");
+							}
+							if(this.player.key==="PlayerW(Right)" || "PlayerW(Left)" || "PlayerW(Front)" || "PlayerW(BacK)"){
+
 								this.player.animations.play("walk", 10, true);
+
 							}
 						}	
 
@@ -171,15 +172,18 @@ MainGame.prototype = {
 
 							if(this.player.key==="PlayerW(Back)"){
 								this.player.loadTexture("PlayerW(Left)");
-								this.player.animations.play("walk", 10, true);
 							}
 							else if(this.player.key==="PlayerW(Front)"){
 								this.player.loadTexture("PlayerW(Left)");
-								this.player.animations.play("walk", 10, true);
 							}
 							else if(this.player.key==="PlayerW(Right)"){
 								this.player.loadTexture("PlayerW(Left)");
+							}
+							
+							if(this.player.key==="PlayerW(Right)" || "PlayerW(Left)" || "PlayerW(Front)" || "PlayerW(BacK)"){
+
 								this.player.animations.play("walk", 10, true);
+
 							}
 						}
 
