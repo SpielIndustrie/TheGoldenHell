@@ -23,8 +23,8 @@ MainGame.prototype = {
 
 			game.load.image("Back", "img/Back.png");
 
-			game.load.tilemap("Map001", "img/Map/Map001.json", null, Phaser.Tilemap.TILED_JSON);
-			game.load.image("Tiles", "img/Map/Tiles/Tiles001-Sheet.png");
+			//game.load.tilemap("Map001", "img/Map/Map001.json", null, Phaser.Tilemap.TILED_JSON);
+			//game.load.image("Tiles", "img/Map/Tiles/Tiles001-Sheet.png");
 
 		//Player
 
@@ -50,6 +50,31 @@ MainGame.prototype = {
 					game.load.spritesheet("Player(LeftNone)", "img/Player/None/Player(LeftNone)-Sheet.png", 30, 30);
 					game.load.spritesheet("Player(RightNone)", "img/Player/None/Player(RightNone)-Sheet.png", 30, 30);
 
+			//PlayerHalf
+
+				//With Head
+
+					game.load.spritesheet("PlayerH(Back)", "img/Player/Half/With Head/PlayerH(Back)-Sheet.png", 30, 30);
+					game.load.spritesheet("PlayerH(Front)", "img/Player/Half/With Head/PlayerH(Front)-Sheet.png", 30, 30);
+					game.load.spritesheet("PlayerH(Left)", "img/Player/Half/With Head/PlayerH(Left)-Sheet.png", 30, 30);
+					game.load.spritesheet("PlayerH(Right)", "img/Player/Half/With Head/PlayerH(Right)-Sheet.png", 30, 30);
+
+				//With Keule
+
+					//Walk
+
+						game.load.spritesheet("PlayerKW(Back)", "img/Player/Half/With Keule/Walk/PlayerWK(Back)-Sheet.png", 30, 30);
+						game.load.spritesheet("PlayerKW(Front)", "img/Player/Half/With Keule/Walk/PlayerWK(Front)-Sheet.png", 30, 30);
+						game.load.spritesheet("PlayerKW(Left)", "img/Player/Half/With Keule/Walk/PlayerWK(Left)-Sheet.png", 30, 30);
+						game.load.spritesheet("PlayerKW(Right)", "img/Player/Half/With Keule/Walk/PlayerWK(Back)-Sheet.png", 30, 30);
+
+					//Attack
+
+						game.load.spritesheet("PlayerKA(Back)", "img/Player/Half/With Keule/Attack/PlayerAK(Back)-Sheet.png", 30, 30);
+						game.load.spritesheet("PlayerKA(Front)", "img/Player/Half/With Keule/Attack/PlayerAK(Front)-Sheet.png", 30, 30);
+						game.load.spritesheet("PlayerKA(Left)", "img/Player/Half/With Keule/Attack/PlayerAK(Left)-Sheet.png", 30, 30);
+						game.load.spritesheet("PlayerKA(Right)", "img/Player/Half/With Keule/Attack/PlayerAK(Back)-Sheet.png", 30, 30);
+
 		//Items
 
 			//Begin
@@ -59,6 +84,7 @@ MainGame.prototype = {
 	},
 
 	create: function(){
+
 		//map= game.add.tilemap("Map001");
 		//map.addTilesetImage("Ground", "Tiles");
 
@@ -297,24 +323,122 @@ MainGame.prototype = {
 
 					}
 
+			//PlayerHalf
+
+				//With Head
+
+					
+
 				//PickUp
 
-					if(this.player.x == this.keule.x || this.keule.x == this.keule.x){
+					if(this.player.x == this.keule.x){
 
-						if(this.player.y == this.keule.y || this.player.y == this.keule.y){
+						if(this.player.y == this.keule.y){
 
-							this.player.loadTexture("PlayerW(Back)");
+							//Half is the Texture
+
+								if(this.player.key=="PlayerH(Back)"){
+
+									this.player.loadTexture("PlayerW(Back)")
+
+								}
+								if(this.player.key=="PlayerH(Right)"){
+
+									this.player.loadTexture("PlayerW(Right)");
+
+								}
+								if(this.player.key=="PlayerH(Left)"){
+
+									this.player.loadTexture("PlayerW(Left)");
+
+								}
+								if(this.player.key=="PlayerH(Front)"){
+
+									this.player.loadTexture("PlayerW(Front)");
+
+								}
+
+							//None is the Texture
+
+								if(this.player.key=="Player(BackNone)"){
+
+									this.player.loadTexture("PlayerKW(Back)");
+
+								}
+								if(this.player.key=="Player(RightNone)"){
+
+									this.player.loadTexture("PlayerKW(Right)");
+
+								}
+								if(this.player.key=="Player(LeftNone)"){
+
+									this.player.loadTexture("PlayerKW(Left)");
+
+								}
+								if(this.player.key=="Player(FrontNone)"){
+
+									this.player.loadTexture("PlayerKW(Front)");
+
+								}
+
+
 							this.keule.destroy();
 
 						}
 
 					}
 
-					if(this.player.x == this.head.x || this.player.x == this.head.x){
+					if(this.player.x == this.head.x){
 
-						if(this.player.y == this.head.y || this.player.y == this.head.y){
+						if(this.player.y == this.head.y){
+							
+							//Half is the Texture
 
-							this.player.loadTexture("PlayerW(Back)");
+								if(this.player.key=="PlayerKW(Back)"){
+
+									this.player.loadTexture("PlayerW(Back)")
+
+								}
+								if(this.player.key=="PlayerKW(Right)"){
+
+									this.player.loadTexture("PlayerW(Right)");
+
+								}
+								if(this.player.key=="PlayerKW(Left)"){
+
+									this.player.loadTexture("PlayerW(Left)");
+
+								}
+								if(this.player.key=="PlayerKW(Front)"){
+
+									this.player.loadTexture("PlayerW(Front)");
+
+								}
+
+							//None is the Texture
+
+								if(this.player.key=="Player(BackNone)"){
+
+									this.player.loadTexture("PlayerH(Back)");
+
+								}
+								if(this.player.key=="Player(RightNone)"){
+
+									this.player.loadTexture("PlayerH(Right)");
+
+								}
+								if(this.player.key=="Player(LeftNone)"){
+
+									this.player.loadTexture("PlayerH(Left)");
+
+								}
+								if(this.player.key=="Player(FrontNone)"){
+
+									this.player.loadTexture("PlayerH(Front)");
+
+								}
+
+							
 							this.head.destroy();
 
 						}
